@@ -22,5 +22,5 @@ Route::get('/', function () {
 Route::get('pelanggan0221', [Controller0221::class, 'pelanggan']);
 Route::get('pelanggan0221/cari', [Controller0221::class, 'cari']);
 Route::get('home0221', [Controller0221::class, 'home']);
-Route::get('home0221/carihome', [Controller0221::class, 'carihome']);
+Route::get('home0221/cari', [Controller0221::class, 'cari']);
 Route::get('edit', [Controller0221::class, 'edit']);

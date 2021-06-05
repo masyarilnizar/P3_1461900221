@@ -25,7 +25,7 @@
 </head>
 
 <p>Cari Data Pelanggan :</p>
-	<form action="/home0221/carihome" method="GET">
+	<form action="/home0221/cari" method="GET">
 		<input type="text" name="cari" placeholder="Cari Pelanggan .." value="{{ old('cari') }}">
 		<input type="submit" value="CARI">
 	</form>

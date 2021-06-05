@@ -18,35 +18,22 @@ class Controller0221 extends Controller
         
         return view('tambah0221');
     }
-
     public function cari(Request $request)
     {
-        // menangkap data pencarian
+        
         $cari = $request->cari;
-     
-         // mengambil data dari table pegawai sesuai pencarian data
-        $pelanggan = DB::table('pelanggan')
-        ->where('nama','like',"%".$cari."%")
+        $pelanggan = DB::table('transaksi')
+        ->select(DB::raw('pelanggan.id as id_pl,pelanggan.nama as nama_pl,pelanggan.alamat,barang.id as id_br,transaksi.id_barang,barang.nama as nama_br,barang.harga,transaksi.id,transaksi.id_pelanggan'))
+        ->join('barang','transaksi.id','=','barang.id')  
+        ->join('pelanggan','transaksi.id','=','pelanggan.id') 
+        ->where('pelanggan.nama','like',"%".$cari."%")
         ->paginate();
      
-            // mengirim data pegawai ke view index
-        return view('pelanggan0221',['pelanggan' => $pelanggan]);
+            
+        return view('home0221',['home' => $pelanggan]);
     }
-    public function carihome(Request $request)
-    {
-        // menangkap data pencarian
-        $cari = $request->cari;
-     
-         // mengambil data dari table pegawai sesuai pencarian data
-        $home = DB::table('pelanggan')
-        ->select(DB::raw('pelanggan.id as id_pl,pelanggan.nama as nama_pl,pelanggan.alamat,barang.id as id_br,transaksi.id_barang,barang.nama as nama_br,barang.harga,transaksi.id,transaksi.id_pelanggan'))
-        ->join('transaksi','pelanggan.id','=','transaksi.id_pelanggan')
-        ->where('nama','like',"%".$cari."%")
-        ->get();
-        // dd($home->all());
-            // mengirim data pegawai ke view index
-        return view('home0221',['home' => $home]);
-    }
+    
+    
     
     public function home(Request $request){
         
